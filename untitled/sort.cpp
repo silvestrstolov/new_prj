@@ -1,24 +1,24 @@
 #include "hall.h"
 
 
-float* simple_insertion_sort(float* array, int length,cmp_func f)
+float* simple_insertion_sort(MyArray array, MyArray array_lenth,cmp_func f)
 {
     float  x;
     int j=0;
-    for ( int i = 1; i < length; i++)
+    for ( int i = 1; i < array.get_lenght(); i++)
     {
-        x = array[i];
+        x = array.get_element(i);
         j = i - 1;
-        while  (f(x ,array [j]) && (j >= 0))
+        while  (f(x ,array.get_element(j)) && (j >= 0))
         {
-            array [j + 1] = array [j];
+            array.set_element( j+1 , array.get_element(j));
 
             j--;
         }
-        array [j + 1] = x;
+        array.set_element( j+1 , x);
     }
 
-    return array;
+    //return array;
 }
 
 float* simple_bubble_sort( float* array, int length, cmp_func f)

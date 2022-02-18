@@ -1,66 +1,99 @@
 #include "hall.h"
 
-float* Create_din_arr( int lenght)
+
+MyArray::MyArray()
 {
-    float*temp=nullptr;
-    temp=(float*)malloc(lenght*sizeof(float));
-    return temp;
+    for(int i = 0; i < this->array_lenght; i++)
+        this->array[i] = 0;
 }
 
-void fill_rand_array(float* arr, int length)
+int   MyArray::get_lenght()
+{
+    return this->array_lenght;
+}
+
+float MyArray::get_element(int i)
+{
+    if ( (i < 0 ) || (i >= this->array_lenght))
+        return 0;
+    else
+        return this->array[i];
+}
+
+void  MyArray::set_lenght(int arr_lenght)
+{
+    if (arr_lenght <= 0)
+        return;
+    else
+        this->array_lenght = arr_lenght;
+}
+
+void  MyArray::set_element(int i, float v)
+{
+    if ( (i < 0 ) || (i >= this->array_lenght))
+        return;
+    else
+        this->array[i] = v;
+}
+
+void  MyArray::print_element()
+{
+        cout << "Printing array:" << endl << endl << endl;
+        for (int k=0; k <this->array_lenght; k++)
+            cout << this->array[k] << " ";
+        cout << endl << endl << endl;
+}
+
+
+void  MyArray::fill_rand_array()
 {
     srand(time(nullptr));
-    if ( arr == nullptr )
+    if ( this->array == nullptr )
     {
         cout << "ERROR\n"; return;
     }
 
-    for (int k=0; k < length; k++)
+    for (int k=0; k < this->array_lenght; k++)
     {
-        arr[k]=rand()%1000;
+        this->array[k]=rand()%1000;
     }
 }
 
-void print_array(float* arr, int length)
+void  MyArray::find_min_array ()
 {
-    cout << "Printing array:" << endl << endl << endl;
-    for (int k=0; k <length; k++)
-        cout << (float)arr[k]<< " ";
-    cout << endl << endl << endl;
-}
 
-int find_min_array(float* array, int lenght)
-{
-    int pos=0,buf=0;
-    if (array == nullptr)
-    {
-        cout << "\n!!!ERROR!!! MATRIX == NULL!!!\n"; return 0;
-    }
-    for(int i = 0; i < lenght; i++)
-    {
-        if ((int)array[i] % 2 == 0)
+        int pos=0,buf=0;
+        if (this->array == nullptr)
         {
-            if(array[i] > buf)
+            cout << "\n!!!ERROR!!! MATRIX == NULL!!!\n"; return;
+        }
+        for(int i = 0; i < this->array_lenght; i++)
+        {
+            if ((int)this->array[i] % 2 == 0)
             {
-                buf = array[i];
-                pos = i;
+                if(this->array[i] > buf)
+                {
+                    buf = this->array[i];
+                    pos = i;
+                }
             }
         }
-    }
-    cout << "element " << (float) buf << endl << endl;
-    cout << "position " << (int) pos << endl << endl;
+        cout << "element " << (float) buf << endl << endl;
+        cout << "position " << (int) pos << endl << endl;
+
 }
 
-void find_prodused_arr(float* array, float* prod_arr, int lenght)
+
+float MyArray::find_prodused_arr ()
 {
     float buf=0.0f;
-    for(int i=0; i < lenght; i++)
+    for(int i=0; i < this->array_lenght; i++)
     {
         int k;
-        if(i != lenght) {k = (i + 1);}
+        if(i != this->array_lenght) {k = (i + 1);}
         else k = (0);
         buf = (array[i] * array[k]);
-        prod_arr[i] = buf;
+        return buf;
         buf = 0.0f;
     }
 }
